@@ -1,24 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
-
+import{ BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import Home from './Components/Home/Home/Home';
+import AdminPanel from './Components/AdminPanel/AdminPanel/AdminPanel';
+import AdminHome from './Components/AdminPanel/Pages/AdminHome/AdminHome';
+import AddProduct from './Components/AdminPanel/Pages/AddProduct/AddProduct';
+import EditProduct from './Components/AdminPanel/Pages/EditProduct/EditProduct';
+import DeleteProduct from './Components/AdminPanel/Pages/DeleteProduct/DeleteProduct';
+import Dashboard from './Components/AdminPanel/Pages/Dashboard/Dashboard';
 function App() {
+
+  const pathName = window.location.pathname
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router >
+      { pathName.includes("admin") ? <AdminPanel /> : null }
+      <Switch >
+        <Route exact path = "/">
+          <Home />
+        </Route>
+        <Route exact path = "/admin">
+          <AdminHome />
+        </Route>
+        <Route exact path = "/admin/addProduct">
+          <AddProduct />
+        </Route>
+        <Route exact path = "/admin/editProduct">
+          <EditProduct />
+        </Route>
+        <Route exact path = "/admin/deleteProduct">
+          <DeleteProduct />
+        </Route>
+        <Route exact path = "/admin/statistics">
+          <Dashboard />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
